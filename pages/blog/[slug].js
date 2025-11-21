@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
-import Image from "next/image";
 import {
   Calendar,
   Eye,
@@ -325,13 +324,9 @@ const shareTitle = blog ? blog.title : "";
           <>
             <link
               rel="preload"
-              href={blog.featured_image}
+              href={utils.getImageUrl(blog.featured_image)}
               as="image"
               fetchpriority="high"
-            />
-            <meta
-              name="viewport"
-              content="width=device-width, initial-scale=1"
             />
           </>
         )}
@@ -412,24 +407,22 @@ const shareTitle = blog ? blog.title : "";
             // Dual images - 2-column grid layout (stacked on mobile)
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="aspect-[4/3] overflow-hidden rounded-xl shadow-lg relative">
-                  <Image
+                <div className="aspect-[4/3] overflow-hidden rounded-xl shadow-lg">
+                  <img
                     src={blog.featured_image}
                     alt={blog.title}
-                    fill
-                    className="object-cover transition-transform duration-300 hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                     onError={(e) => {
                       e.target.src = DEFAULT_IMAGES.ARTICLE_THUMBNAIL;
                       e.target.onerror = null;
                     }}
                   />
                 </div>
-                <div className="aspect-[4/3] overflow-hidden rounded-xl shadow-lg relative">
-                  <Image
+                <div className="aspect-[4/3] overflow-hidden rounded-xl shadow-lg">
+                  <img
                     src={blog.featured_image_2}
                     alt={`${blog.title} - Image 2`}
-                    fill
-                    className="object-cover transition-transform duration-300 hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                     onError={(e) => {
                       e.target.src = DEFAULT_IMAGES.ARTICLE_THUMBNAIL;
                       e.target.onerror = null;
@@ -440,17 +433,16 @@ const shareTitle = blog ? blog.title : "";
             </div>
           ) : blog.featured_image ? (
             // Single image - large centered display
-            <div className="max-w-3xl mx-auto rounded-xl overflow-hidden shadow-2xl relative h-[400px]">
-              <Image
+            <div className="max-w-3xl mx-auto rounded-xl overflow-hidden shadow-2xl h-[400px]">
+              <img
                 src={
                   utils.getImageUrl(blog.featured_image) ||
                   utils.getImageUrl(DEFAULT_IMAGES.ARTICLE_THUMBNAIL)
                 }
                 alt={blog.title}
-                fill
-                className="object-cover"
+                className="w-full h-full object-cover"
                 onError={(e) => {
-                  e.target.style.display = "none";
+                  e.target.src = DEFAULT_IMAGES.ARTICLE_THUMBNAIL;
                   e.target.onerror = null;
                 }}
               />
@@ -620,19 +612,16 @@ const shareTitle = blog ? blog.title : "";
                           key={book.id}
                           className="flex gap-3 pb-4 border-b border-gray-100 last:border-b-0 last:pb-0 group hover:bg-gray-50 p-2 rounded-lg transition-colors"
                         >
-                          <div className="w-12 h-16 flex-shrink-0 rounded overflow-hidden">
+                          <div className="w-12 h-16 flex-shrink-0 rounded overflow-hidden relative">
                             {book.cover_image ? (
-                              <Image
+                              <img
                                 src={utils.getImageUrl(book.cover_image)}
                                 alt={book.title}
-                                width={48}
-                                height={64}
-                                loading="lazy"
                                 className="w-full h-full object-cover"
                                 onError={(e) => {
-                                  // Fallback to gradient background if image fails to load
                                   e.target.style.display = "none";
-                                  e.target.nextSibling.style.display = "flex";
+                                  const fallback = e.target.nextElementSibling;
+                                  if (fallback) fallback.style.display = "flex";
                                 }}
                               />
                             ) : null}
@@ -718,7 +707,9 @@ const shareTitle = blog ? blog.title : "";
                         setBlog(null);
                         setRelatedBooks([]);
                         setRelatedArticles([]);
-                        router.push(`/blog/${article.slug}`);
+                        // Ensure no double /blog/blog/ in URL
+                        const cleanSlug = article.slug.replace(/^\/blog\//, '');
+                        router.push(`/blog/${cleanSlug}`);
                       }}
                     >
                       <div className="aspect-video relative">
