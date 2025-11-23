@@ -5,18 +5,7 @@ import FormData from 'form-data'
 import fs from 'fs'
 
 // Auto-detect production / localhost
-const BACKEND_URL = (() => {
-  // If env variable provided → priority
-  if (process.env.BACKEND_URL) return process.env.BACKEND_URL;
-
-  // When running in Vercel/Production → use live backend
-  if (process.env.NODE_ENV === "production") {
-    return "https://boganto.com";
-  }
-
-  // Default localhost for development
-  return "http://localhost:8000";
-})();
+const BACKEND_URL = process.env.BACKEND_URL;
 
 export default async function handler(req, res) {
   try {

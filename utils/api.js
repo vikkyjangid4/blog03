@@ -1,25 +1,7 @@
 import axios from 'axios'
 
 // Dynamic BASE_URL - supports both localhost and production (boganto.com)
-export const BASE_URL = (() => {
-  // Use environment variable if set
-  if (typeof window !== 'undefined' && process.env.NEXT_PUBLIC_API_BASE_URL) {
-    return process.env.NEXT_PUBLIC_API_BASE_URL;
-  }
-  
-  // In browser environment, detect if localhost or production
-  if (typeof window !== 'undefined') {
-    const hostname = window.location.hostname;
-    if (hostname === 'localhost' || hostname === '127.0.0.1') {
-      return 'http://localhost:8000';
-    }
-    // Production domain
-    return 'https://boganto.com';
-  }
-  
-  // Server-side fallback
-  return process.env.NEXT_PUBLIC_API_BASE_URL || "https://boganto.com";
-})();
+export const BASE_URL = process.env.BACKEND_URL;
 
 // Fallback for API_BASE_URL (for backward compatibility)
 const API_BASE_URL = BASE_URL;
@@ -161,6 +143,10 @@ export const bannerAPI = {
 export const utils = {
   // Get full image URL using dynamic BASE_URL
   getImageUrl: (imagePath) => {
+    const baseUrl = process.env.NODE_ENV === 'production' ? BASE_URL : 'http://localhost:5173';
+
+    console.log('BASE_URL in getImageUrl:', baseUrl);
+    
     if (!imagePath) return '';
     if (imagePath.startsWith('http')) return imagePath;
     
@@ -169,11 +155,11 @@ export const utils = {
     
     // If already starts with uploads/, just prepend BASE_URL
     if (cleanPath.startsWith('uploads/')) {
-      return `${BASE_URL}/${cleanPath}`;
+      return `${baseUrl}/${cleanPath}`;
     }
     
     // Otherwise prepend uploads/
-    return `${BASE_URL}/uploads/${cleanPath}`;
+    return `${baseUrl}/uploads/${cleanPath}`;
   },
 
   // Format date

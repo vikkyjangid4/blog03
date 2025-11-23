@@ -1,11 +1,13 @@
 /** @type {import('next').NextConfig} */
+
+const backendUrl = process.env.BACKEND_URL;
+
 const nextConfig = {
   reactStrictMode: true,
 
   images: {
     unoptimized: true,
     domains: ['localhost', 'boganto.com', 'www.boganto.com'],
-
     remotePatterns: [
       {
         protocol: 'https',
@@ -21,7 +23,7 @@ const nextConfig = {
         protocol: 'http',
         hostname: 'localhost',
         pathname: '/uploads/**',
-      }
+      },
     ],
 
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
@@ -30,11 +32,6 @@ const nextConfig = {
   },
 
   async rewrites() {
-    const backendUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 
-      (process.env.NODE_ENV === 'production'
-        ? 'https://boganto.com'
-        : 'http://localhost:8000');
-
     return [
       {
         source: '/uploads/:path*',
@@ -42,12 +39,8 @@ const nextConfig = {
       },
     ];
   },
-
   env: {
-    BACKEND_URL:
-      process.env.NODE_ENV === 'production'
-        ? process.env.NEXT_PUBLIC_API_BASE_URL || 'https://boganto.com'
-        : 'http://localhost:8000',
+    BACKEND_URL: backendUrl,
   },
 };
 

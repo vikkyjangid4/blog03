@@ -172,10 +172,7 @@ function BlogDetailPage({
     router.push(`/tag/${encodeURIComponent(tag.trim())}`);
   };
 
-  const siteUrl =
-  process.env.NODE_ENV === "production"
-    ? "https://boganto.com"
-    : "http://localhost:5173";
+  const siteUrl = process.env.BACKEND_URL;
 
 // Share URL (browser + server safe)
 const shareUrl =
@@ -409,7 +406,7 @@ const shareTitle = blog ? blog.title : "";
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="aspect-[4/3] overflow-hidden rounded-xl shadow-lg">
                   <img
-                    src={blog.featured_image}
+                    src={utils.getImageUrl(blog.featured_image)}
                     alt={blog.title}
                     className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                     onError={(e) => {
@@ -420,7 +417,7 @@ const shareTitle = blog ? blog.title : "";
                 </div>
                 <div className="aspect-[4/3] overflow-hidden rounded-xl shadow-lg">
                   <img
-                    src={blog.featured_image_2}
+                    src={utils.getImageUrl(blog.featured_image_2)}
                     alt={`${blog.title} - Image 2`}
                     className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                     onError={(e) => {
@@ -715,7 +712,7 @@ const shareTitle = blog ? blog.title : "";
                       <div className="aspect-video relative">
                         <img
                           src={
-                            article.featured_image ||
+                            (utils.getImageUrl(article.featured_image)) ||
                             DEFAULT_IMAGES.ARTICLE_THUMBNAIL
                           }
                           alt={article.title}

@@ -2,10 +2,7 @@
 import axios from 'axios'
 
 // Unified environment-based backend URL
-const BACKEND_URL =
-  process.env.NODE_ENV === 'production'
-    ? 'https://boganto.com'
-    : 'http://localhost:8000';
+const BACKEND_URL = process.env.BACKEND_URL;
 
 export default async function handler(req, res) {
   const { slug } = req.query

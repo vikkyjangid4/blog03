@@ -1,24 +1,6 @@
 // Re-export image utilities for backward compatibility
 // Dynamic BASE_URL - supports both localhost and production
-export const BASE_URL = (() => {
-  // Use environment variable if set
-  if (typeof window !== 'undefined' && process.env.NEXT_PUBLIC_API_BASE_URL) {
-    return process.env.NEXT_PUBLIC_API_BASE_URL;
-  }
-  
-  // In browser environment, detect if localhost or production
-  if (typeof window !== 'undefined') {
-    const hostname = window.location.hostname;
-    if (hostname === 'localhost' || hostname === '127.0.0.1') {
-      return 'http://localhost:8000';
-    }
-    // Production domain
-    return 'https://boganto.com';
-  }
-  
- // Server-side fallback
-  return process.env.NEXT_PUBLIC_API_BASE_URL || "https://boganto.com";
-})();
+export const BASE_URL = process.env.BACKEND_URL;
 
 // Default images for the application
 export const DEFAULT_IMAGES = {

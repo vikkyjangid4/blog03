@@ -4,10 +4,9 @@ import Head from "next/head";
 import Link from "next/link";
 import HeroBanner from "../components/HeroBanner";
 import CategoryFilter from "../components/CategoryFilter";
-import BlogCard from "../components/BlogCard";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { blogAPI, bannerAPI } from "../utils/api";
+import { blogAPI, bannerAPI, utils } from "../utils/api";
 import { TrendingUp, Calendar, Eye } from "lucide-react";
 
 const HomePage = ({ initialData, banners: initialBanners }) => {
@@ -191,7 +190,7 @@ const HomePage = ({ initialData, banners: initialBanners }) => {
                             <div className="flex-shrink-0">
                               {blog.featured_image ? (
                                 <img
-                                  src={blog.featured_image}
+                                  src={utils.getImageUrl(blog.featured_image)}
                                   alt={blog.title}
                                   className="w-16 h-16 object-cover rounded-lg"
                                   onError={(e) => {
@@ -285,7 +284,7 @@ const HomePage = ({ initialData, banners: initialBanners }) => {
                                   <div className="relative h-56 overflow-hidden">
                                     {blog.featured_image ? (
                                       <img
-                                        src={blog.featured_image}
+                                        src={utils.getImageUrl(blog.featured_image)}
                                         alt={blog.title}
                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                         onError={(e) => {
@@ -491,7 +490,7 @@ const HomePage = ({ initialData, banners: initialBanners }) => {
                                 <div className="relative h-48 overflow-hidden">
                                   {blog.featured_image ? (
                                     <img
-                                      src={blog.featured_image}
+                                      src={utils.getImageUrl(blog.featured_image)}
                                       alt={blog.title}
                                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                       onError={(e) => {

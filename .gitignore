@@ -14,9 +14,6 @@ dist-ssr
 
 # Environment files (sensitive data)
 .env
-.env.local
-.env.*.local
-.env.production
 api/.env.production
 outer_api/.env.production
 
