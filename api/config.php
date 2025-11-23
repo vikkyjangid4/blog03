@@ -1,10 +1,17 @@
 <?php
 // Database configuration
+// class DatabaseConfig {
+//     private $host = 'boganto-aurora.cluster-cdk0ug8eg3rn.ap-south-1.rds.amazonaws.com';
+//     private $db_name = 'blog';
+//     private $username = 'blog';
+//     private $password = '7P7cYLTc4lE8prXL';
+//     public $conn;
+
 class DatabaseConfig {
-    private $host = 'boganto-aurora.cluster-cdk0ug8eg3rn.ap-south-1.rds.amazonaws.com';
-    private $db_name = 'blog';
-    private $username = 'blog';
-    private $password = '7P7cYLTc4lE8prXL';
+    private $host = 'localhost';
+    private $db_name = 'boganto_blog';
+    private $username = 'root';
+    private $password = 'Vj2004@jangid';
     public $conn;
 
     public function getConnection() {
