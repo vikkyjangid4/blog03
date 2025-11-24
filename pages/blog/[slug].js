@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import Image from 'next/image'
 import Link from "next/link";
 import {
   Calendar,
@@ -405,7 +406,7 @@ const shareTitle = blog ? blog.title : "";
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="aspect-[4/3] overflow-hidden rounded-xl shadow-lg">
-                  <img
+                  <Image
                     src={utils.getImageUrl(blog.featured_image)}
                     alt={blog.title}
                     className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
@@ -416,7 +417,7 @@ const shareTitle = blog ? blog.title : "";
                   />
                 </div>
                 <div className="aspect-[4/3] overflow-hidden rounded-xl shadow-lg">
-                  <img
+                  <Image
                     src={utils.getImageUrl(blog.featured_image_2)}
                     alt={`${blog.title} - Image 2`}
                     className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
@@ -431,7 +432,7 @@ const shareTitle = blog ? blog.title : "";
           ) : blog.featured_image ? (
             // Single image - large centered display
             <div className="max-w-3xl mx-auto rounded-xl overflow-hidden shadow-2xl h-[400px]">
-              <img
+              <Image
                 src={
                   utils.getImageUrl(blog.featured_image) ||
                   utils.getImageUrl(DEFAULT_IMAGES.ARTICLE_THUMBNAIL)
@@ -611,7 +612,7 @@ const shareTitle = blog ? blog.title : "";
                         >
                           <div className="w-12 h-16 flex-shrink-0 rounded overflow-hidden relative">
                             {book.cover_image ? (
-                              <img
+                              <Image
                                 src={utils.getImageUrl(book.cover_image)}
                                 alt={book.title}
                                 className="w-full h-full object-cover"
@@ -710,7 +711,7 @@ const shareTitle = blog ? blog.title : "";
                       }}
                     >
                       <div className="aspect-video relative">
-                        <img
+                        <Image
                           src={
                             (utils.getImageUrl(article.featured_image)) ||
                             DEFAULT_IMAGES.ARTICLE_THUMBNAIL

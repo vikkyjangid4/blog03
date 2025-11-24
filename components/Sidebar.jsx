@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { TrendingUp, Clock } from 'lucide-react'
 import { blogAPI, utils, BASE_URL } from '../utils/api'
 
@@ -58,7 +59,7 @@ const Sidebar = () => {
       <div className="flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200">
         <div className="flex-shrink-0">
           {blog.featured_image ? (
-            <img
+            <Image
               src={getImageUrl(blog.featured_image)}
               alt={blog.title}
               className="w-16 h-16 object-cover rounded-lg"

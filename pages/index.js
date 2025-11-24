@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
+import Image from 'next/image'
 import HeroBanner from "../components/HeroBanner";
 import CategoryFilter from "../components/CategoryFilter";
 import Header from "../components/Header";
@@ -189,7 +190,7 @@ const HomePage = ({ initialData, banners: initialBanners }) => {
                           >
                             <div className="flex-shrink-0">
                               {blog.featured_image ? (
-                                <img
+                                <Image
                                   src={utils.getImageUrl(blog.featured_image)}
                                   alt={blog.title}
                                   className="w-16 h-16 object-cover rounded-lg"
@@ -283,7 +284,7 @@ const HomePage = ({ initialData, banners: initialBanners }) => {
                                   {/* Image Container with Overlay */}
                                   <div className="relative h-56 overflow-hidden">
                                     {blog.featured_image ? (
-                                      <img
+                                      <Image
                                         src={utils.getImageUrl(blog.featured_image)}
                                         alt={blog.title}
                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
@@ -489,7 +490,7 @@ const HomePage = ({ initialData, banners: initialBanners }) => {
                                 {/* Image Container */}
                                 <div className="relative h-48 overflow-hidden">
                                   {blog.featured_image ? (
-                                    <img
+                                    <Image
                                       src={utils.getImageUrl(blog.featured_image)}
                                       alt={blog.title}
                                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

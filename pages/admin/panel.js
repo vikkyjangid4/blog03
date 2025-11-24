@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
+import Image from 'next/image'
 import { useAuth } from '../../contexts/AuthContext'
 import { blogAPI, categoryAPI, bannerAPI } from '../../utils/api'
 import axios from 'axios'
@@ -894,7 +895,7 @@ const AdminPanel = () => {
                             {(editingBlog?.featured_image || formData.featured_image) && (
                               <div className="mt-2">
                                 <div className="text-xs text-slate-500 mb-1">Current Image:</div>
-                                <img
+                                <Image
                                   src={formData.featured_image ? URL.createObjectURL(formData.featured_image) : editingBlog?.featured_image}
                                   alt="Featured image preview"
                                   className="w-full h-32 object-cover rounded-lg border"
@@ -922,7 +923,7 @@ const AdminPanel = () => {
                             {(editingBlog?.featured_image_2 || formData.featured_image_2) && (
                               <div className="mt-2">
                                 <div className="text-xs text-slate-500 mb-1">Current Image:</div>
-                                <img
+                                <Image
                                   src={formData.featured_image_2 ? URL.createObjectURL(formData.featured_image_2) : editingBlog?.featured_image_2}
                                   alt="Second featured image preview"
                                   className="w-full h-32 object-cover rounded-lg border"
@@ -1073,7 +1074,7 @@ const AdminPanel = () => {
                                   )}
                                 </label>
                                 <div className="relative inline-block">
-                                  <img
+                                  <Image
                                     src={book.cover_image ? URL.createObjectURL(book.cover_image) : book.cover_image_url}
                                     alt="Book cover preview"
                                     className="w-24 h-32 object-cover rounded border border-gray-300"
@@ -1264,7 +1265,7 @@ const AdminPanel = () => {
                             <div key={banner.id} className="border border-gray-200 rounded-lg p-4">
                               {/* Banner Image */}
                               <div className="aspect-video mb-4 bg-gray-100 rounded-lg overflow-hidden">
-                                <img
+                                <Image
                                   src={banner.image_url}
                                   alt={banner.title}
                                   className="w-full h-full object-cover"
@@ -1445,7 +1446,7 @@ const AdminPanel = () => {
                           <div className="mt-4">
                             <div className="text-xs text-slate-500 mb-2">Preview:</div>
                             <div className="aspect-video w-full max-w-md bg-gray-100 rounded-lg overflow-hidden">
-                              <img
+                              <Image
                                 src={bannerFormData.banner_image ? URL.createObjectURL(bannerFormData.banner_image) : editingBanner?.image_url}
                                 alt="Banner preview"
                                 className="w-full h-full object-cover"
