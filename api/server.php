@@ -78,6 +78,11 @@ if ($uri === '/api/blogs' ||
         require_once 'adminRelatedBooks.php';
         break;
     
+    case '/api/upload/editor-image':
+        // Rich text editor image upload
+        require_once 'uploadEditorImage.php';
+        break;
+    
     default:
         // Check if it's a static file request from uploads directory
         if (preg_match('/\/uploads\/(.+)/', $uri, $matches)) {
